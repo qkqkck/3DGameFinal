@@ -27,8 +27,12 @@ public class PlayerCtrl : MonoBehaviour
 
     void Update()
     {
-        Move();
         Jump();
+    }
+
+    void FixedUpdate()
+    {
+        Move();
     }
 
     void Move() //플레이어 이동 & 화면 회전

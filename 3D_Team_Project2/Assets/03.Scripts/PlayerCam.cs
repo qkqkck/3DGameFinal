@@ -14,7 +14,7 @@ public class PlayerCam : MonoBehaviour
         tr = GetComponent<Transform>();
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         tr.position = Vector3.Lerp(tr.position, //시작 위치
                                     targetTr.position - (targetTr.forward * dist) + (Vector3.up * height), // 종료위치

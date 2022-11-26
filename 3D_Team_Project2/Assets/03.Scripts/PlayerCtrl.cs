@@ -12,7 +12,7 @@ public class PlayerCtrl : MonoBehaviour
     public float rotSpeed = 100.0f; //화면 회전 변수
     public float jumpPower = 10.0f; //플레이어의 첫번째 점프 정도
     public float doublejumpPower = 10.0f; //플레이어의 두번째 점프 정도
-    public float dashSpeed = 30.0f; //대쉬 속도
+    public float dashSpeed = 20.0f; //대쉬 속도
     private int jumpCount = 2; // 점프 횟수를 셀 변수
 
 
@@ -22,12 +22,12 @@ public class PlayerCtrl : MonoBehaviour
     {
         tr = GetComponent<Transform>(); //transform 할당
         myRigidbody = GetComponent<Rigidbody>();
-
     }
 
     void Update()
     {
         Jump();
+        Dash();
     }
 
     void FixedUpdate()
@@ -44,6 +44,7 @@ public class PlayerCtrl : MonoBehaviour
         tr.Translate(moveDir.normalized * Time.deltaTime * moveSpeed, Space.Self);
 
         tr.Rotate(Vector3.up * Time.deltaTime * rotSpeed * Input.GetAxis("Mouse X")); // 화면 회전
+
     }
     void Jump() // 플레이어 점프
     {
@@ -53,7 +54,6 @@ public class PlayerCtrl : MonoBehaviour
             {
                 myRigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
                 jumpCount--;
-                Debug.Log("JUMP!!!!");
             }
         }
         else if(jumpCount == 1) //2단 점프
@@ -62,8 +62,22 @@ public class PlayerCtrl : MonoBehaviour
             {
                 myRigidbody.AddForce(Vector3.up * doublejumpPower, ForceMode.Impulse);
                 jumpCount--;
-                Debug.Log("DOUBLE JUMP!!!!");
             }
+        }
+    }
+    
+    void Dash() //플레이어 대쉬
+    {
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeed = dashSpeed;
+            Debug.Log("DASH!!!!!!!!!!!!!");
+        }
+
+        if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            moveSpeed = 10.0f;
+            Debug.Log("DASH DONE!!!!!!!!!!");
         }
     }
 

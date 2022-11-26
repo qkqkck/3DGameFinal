@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static EnemyAI;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI: MonoBehaviour
 {
-    public MonsterState monsterState = MonsterState.idle; // 몬스터 상태
-    public enum MonsterState { idle, trace, attack }; // 기본, 추적, 공격
-
+    public enum MonsterState { idle, trace, attack, die };
+    public MonsterState monsterState = MonsterState.idle;
     private Transform monsterTr;
     private Transform playerTr;
     private NavMeshAgent nvAgent;
     private Animator animator;
 
-    public float traceDist = 0.0f; // 추적 거리
-    public float attackDist = 0.0f; // 공격 사거리
-    private bool isHide = false;
+    public float traceDist = 100.0f;
+    public float attackDist = 2.0f;
+    private bool isDie = false;
+
+    //private int hp = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +29,9 @@ public class EnemyAI : MonoBehaviour
         StartCoroutine(this.MosterAction());
     }
 
-    IEnumerator CheckMonsterState() // 몬스터 상태
+    IEnumerator CheckMonsterState()
     {
-        while (!isHide)
+        while (!isDie)
         {
             yield return new WaitForSeconds(0.2f);
 
@@ -52,41 +52,76 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    IEnumerator MosterAction() // 몬스터 행동
+    IEnumerator MosterAction()
     {
-        while (!isHide)
+        while (!isDie)
         {
             switch (monsterState)
             {
                 case MonsterState.idle:
                     nvAgent.isStopped = true;
-                    animator.SetBool("", false); // 추적
+                    animator.SetBool("IsTrace", false);
                     break;
                 case MonsterState.trace:
                     nvAgent.destination = playerTr.position;
                     nvAgent.isStopped = false;
-                    animator.SetBool("", false); // 공격
-                    animator.SetBool("", true); // 추적
+                    animator.SetBool("IsAttack", false);
+                    animator.SetBool("IsTrace", true);
                     break;
                 case MonsterState.attack:
                     nvAgent.isStopped = true;
-                    animator.SetBool("", true); // 공격
+                    animator.SetBool("IsAttack", true);
                     break;
             }
             yield return null;
         }
     }
-
-    void OnPlayerDie() // 플레이어 사망 시
+    /*
+    void OnPlayerDie()
     {
         StopAllCoroutines();
         nvAgent.isStopped = true;
-        animator.SetTrigger(""); // 빈칸, 알맞은 행동
+        animator.SetTrigger("IsPlayerDie");
     }
 
+    private void OnCollisionEnter(Collision coll)
+    {
+        if (coll.gameObject.tag == "BULLET")
+        {
+            Destroy(coll.gameObject);
+            hp -= coll.gameObject.GetComponent<BulletCtrl>().damage;
+
+            if (hp <= 0)
+            {
+                MonsterDie();
+            }
+            else
+            {
+                animator.SetTrigger("IsHIt");
+            }
+        }
+    }
+
+    void MonsterDie()
+    {
+        StopAllCoroutines();
+
+        isDie = true;
+        monsterState = MonsterState.die;
+        nvAgent.isStopped = true;
+        animator.SetTrigger("IsDie");
+
+        gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
+
+        foreach (Collider coll in gameObject.GetComponentsInChildren<SphereCollider>())
+        {
+            coll.enabled = false;
+        }
+    }
+    */
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

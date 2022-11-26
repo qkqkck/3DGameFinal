@@ -224,7 +224,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 168258358}
-  - component: {fileID: 168258357}
   - component: {fileID: 168258356}
   - component: {fileID: 168258355}
   - component: {fileID: 168258354}
@@ -252,6 +251,7 @@ MonoBehaviour:
   jumpPower: 10
   doublejumpPower: 10
   dashSpeed: 30
+  anim: {fileID: 0}
 --- !u!136 &168258355
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -282,26 +282,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!95 &168258357
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168258353}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 6f71b6572424cf6469331fca2f54791c, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &168258358
 Transform:
   m_ObjectHideFlags: 0

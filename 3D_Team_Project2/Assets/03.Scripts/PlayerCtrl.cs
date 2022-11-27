@@ -19,6 +19,7 @@ public class PlayerCtrl : MonoBehaviour
     Rigidbody myRigidbody;
 
     public Animator anim;
+    private int jumping = 0; 
 
     void Start()
     {
@@ -103,6 +104,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             //Debug.Log("트리거");
             anim.SetBool("IsJumping", false);
+            jumping = 0;
         }
     }
 
@@ -110,30 +112,44 @@ public class PlayerCtrl : MonoBehaviour
 
     void AnimCtrl() //애니메이션 관리
     {
-        if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")) //달리기, 대쉬
+        if(jumping == 0)
         {
-            anim.SetBool("IsRun", true);
-
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")) //달리기, 대쉬
             {
-                anim.SetBool("IsRun", false);
-                anim.SetBool("IsDash", true);
+                anim.SetBool("IsRun", true);
+
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    anim.SetBool("IsRun", false);
+                    anim.SetBool("IsDash", true);
+                }
+                else
+                {
+                    anim.SetBool("IsDash", false);
+                }
             }
             else
             {
+                anim.SetBool("IsRun", false);
                 anim.SetBool("IsDash", false);
             }
-        }
-        else
-        {
-            anim.SetBool("IsRun", false);
-            anim.SetBool("IsDash", false);
         }
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            anim.SetBool("IsJumping", true);
-            anim.SetTrigger("IsJump");
+            jumping++;
+
+            if(jumping <= 2)
+            {
+                anim.SetBool("IsJumping", true);
+                anim.SetTrigger("IsJump");
+            }
+            else if(jumping == 2)
+            {
+                anim.SetBool("IsJumping", false);
+            }
+                
+
         }
     }
 }

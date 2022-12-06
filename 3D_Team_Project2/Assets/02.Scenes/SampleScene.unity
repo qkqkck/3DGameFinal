@@ -316,11 +316,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6db504c87e240f47a6b6a62f734ef7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleSpeed: 10
   moveSpeed: 10
   rotSpeed: 400
+  dashSpeed: 30
+  slideSpeed: 50
+  slideTime: 0.5
   jumpPower: 10
   doublejumpPower: 10
-  dashSpeed: 30
   anim: {fileID: 0}
   onladder: 0
 --- !u!136 &168258355

@@ -9,12 +9,18 @@ public class PlayerCtrl : MonoBehaviour
     private float v = 0.0f;
 
     private Transform tr;
-    public float moveSpeed = 10.0f; //플레이어의 이동속도 변수
+    public float idleSpeed = 10.0f; //플레이어의 기본 이동속도 변수
+    public float moveSpeed = 10.0f; // 실제로 플레이어가 움직이게 될 속도
     public float rotSpeed = 100.0f; //화면 회전 변수
+    public float dashSpeed = 20.0f; //대쉬 속도
+    public float slideSpeed = 25.0f; //슬라이딩 속도
+    public float slideTime = 0.5f; //슬라이딩이 지속되는 시간
     public float jumpPower = 10.0f; //플레이어의 첫번째 점프 정도
     public float doublejumpPower = 10.0f; //플레이어의 두번째 점프 정도
-    public float dashSpeed = 20.0f; //대쉬 속도
     private int jumpCount = 2; // 점프 횟수를 셀 변수
+
+    private bool isGround = false; //플레이어가 땅에 닿아있는지 확인
+    private bool canSlide = true;
 
     Rigidbody myRigidbody;
 
@@ -27,12 +33,14 @@ public class PlayerCtrl : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         tr = GetComponent<Transform>(); //transform 할당
         myRigidbody = GetComponent<Rigidbody>();
+        moveSpeed = idleSpeed;
     }
 
     void Update()
     {
         Jump();
         Dash();
+        Sliding();
         AnimCtrl();
 
     }
@@ -64,20 +72,20 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (jumpCount == 2)
         {
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 myRigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
                 jumpCount--;
+                isGround = false;
             }
         }
         else if (jumpCount == 1) //2단 점프
         {
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 myRigidbody.AddForce(Vector3.up * doublejumpPower, ForceMode.Impulse);
                 jumpCount--;
+                isGround = false;
             }
         }
     }
@@ -92,18 +100,42 @@ public class PlayerCtrl : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            moveSpeed = 10.0f;
+            moveSpeed = idleSpeed;
             //Debug.Log("DASH DONE!!!!!!!!!!");
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
+    
+    void Sliding() //플레이어 슬라이딩
     {
-        if (collision.gameObject.CompareTag("Ground"))//Ground 태그가 붙은 오브젝트에 닿았을 때
+        //슬라이딩은 바닥에 있을때만 가능하도록
+        if (isGround == true && Input.GetKeyDown(KeyCode.LeftControl) && canSlide == true)
+        {
+            canSlide = false;
+            moveSpeed = slideSpeed;
+            Invoke("slidingFalse", slideTime);
+            Invoke("TFslide", 1f);
+        }
+    }
+
+    void slidingFalse() //슬라이딩이 끝났을 때
+    {
+        moveSpeed = idleSpeed;
+    }
+
+    void TFslide() //슬라이딩을 연속으로 사용하지 못하게 하기 위함
+    {
+        if (canSlide == false)
+        {
+            canSlide = true;
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)// 플레이어가 땅에 있는지 확인
+    {
+        if (other.gameObject.CompareTag("Ground"))//Ground 태그가 붙은 오브젝트에 닿았을 때
         {
             jumpCount = 2; //점프카운트를 2로 초기화
-            //Debug.Log("Ground!!!!");
-
+            isGround = true;
             //땅에 닿으면 사다리에서 내려온것으로 판정
             if (onladder == true)
             {

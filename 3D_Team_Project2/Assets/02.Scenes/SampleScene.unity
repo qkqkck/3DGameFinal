@@ -319,7 +319,7 @@ MonoBehaviour:
   idleSpeed: 10
   moveSpeed: 10
   rotSpeed: 400
-  dashSpeed: 30
+  dashSpeed: 15
   slideSpeed: 50
   slideTime: 0.5
   jumpPower: 10
@@ -883,7 +883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTr: {fileID: 1681588145}
-  dist: 2
+  dist: 1
   height: 0.5
   dampTrace: 20
 --- !u!1001 &1027602048

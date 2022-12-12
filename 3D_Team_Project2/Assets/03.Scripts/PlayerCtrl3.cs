@@ -40,7 +40,7 @@ public class PlayerCtrl3 : MonoBehaviour
         this.transform.rotation = GameObject.Find("StartPos").transform.rotation;
         myRigidbody.velocity = Vector3.zero;
         myRigidbody.angularVelocity = Vector3.zero;
-
+        
     }
 
     void Update()
@@ -133,6 +133,8 @@ public class PlayerCtrl3 : MonoBehaviour
         if (isGround == true && Input.GetKeyDown("c") && canSlide == true)
         {
             Debug.Log("Sliding!!!!!!!!!!!");
+            this.GetComponent<CapsuleCollider>().direction = 2;
+            this.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.25f, 0f);
             canSlide = false;
             moveSpeed = slideSpeed;
             Invoke("slidingFalse", slideTime);
@@ -143,6 +145,8 @@ public class PlayerCtrl3 : MonoBehaviour
     void slidingFalse() //슬라이딩이 끝났을 때
     {
         moveSpeed = idleSpeed;
+        this.GetComponent<CapsuleCollider>().direction = 1;
+        this.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.51f, 0f);
     }
 
     void TFslide() //슬라이딩을 연속으로 사용하지 못하게 하기 위함

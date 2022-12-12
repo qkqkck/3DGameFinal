@@ -742,8 +742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a240a95f99db3d45906ab1b5b51c4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageUI: {fileID: 0}
-  StartUI: {fileID: 0}
+  StageUI: {fileID: 1850254905}
+  StartUI: {fileID: 1929275202}
 --- !u!4 &1025057975
 Transform:
   m_ObjectHideFlags: 0

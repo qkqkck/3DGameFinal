@@ -35,6 +35,11 @@ public class PlayerCtrl3 : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         myRigidbody = GetComponent<Rigidbody>();
         moveSpeed = idleSpeed;
+        this.transform.position = GameObject.Find("StartPos").transform.position;
+        this.transform.rotation = GameObject.Find("StartPos").transform.rotation;
+        myRigidbody.velocity = Vector3.zero;
+        myRigidbody.angularVelocity = Vector3.zero;
+
     }
 
     void Update()
@@ -157,6 +162,30 @@ public class PlayerCtrl3 : MonoBehaviour
             anim.SetBool("IsJumping", false);
             jumping = 0;
             anim.SetBool("IsFalling", false);
+            myRigidbody.velocity = Vector3.zero;
+            myRigidbody.angularVelocity = Vector3.zero;
+            if (isGround == false)
+            {
+                myRigidbody.velocity = Vector3.zero;
+                myRigidbody.angularVelocity = Vector3.zero;
+            }
+        }
+        if (other.gameObject.CompareTag("Wall"))//Ground 태그가 붙은 오브젝트에 닿았을 때
+        {
+            idleSpeed = 3.0f; //플레이어의 기본 이동속도 변수
+            moveSpeed = 3.0f; // 실제로 플레이어가 움직이게 될 속도
+            dashSpeed = 3.0f; //대쉬 속도
+            slideSpeed = 3.0f; //슬라이딩 속도
+        }
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Wall"))//Ground 태그가 붙은 오브젝트에 닿았을 때
+        {
+            idleSpeed = 10.0f; //플레이어의 기본 이동속도 변수
+            moveSpeed = 10.0f; // 실제로 플레이어가 움직이게 될 속도
+            dashSpeed = 20.0f; //대쉬 속도
+            slideSpeed = 30.0f; //슬라이딩 속도
         }
     }
 

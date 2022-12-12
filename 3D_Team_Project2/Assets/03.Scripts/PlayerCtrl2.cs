@@ -169,6 +169,10 @@ public class PlayerCtrl2 : MonoBehaviour
                 anim.SetBool("IsJumping", true);
                 anim.SetTrigger("IsJump");
                 break;
+            case "Slide":
+                anim.SetTrigger("IsSlide");
+                anim.SetBool("IsSliding", true);
+                break;
             case "Idle":
                 break;
            // default:

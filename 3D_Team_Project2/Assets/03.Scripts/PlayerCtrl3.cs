@@ -131,6 +131,7 @@ public class PlayerCtrl3 : MonoBehaviour
             moveSpeed = slideSpeed;
             Invoke("slidingFalse", slideTime);
             Invoke("TFslide", 1f);
+            anim.SetBool("IsSliding", true);
         }
     }
     void slidingFalse() //슬라이딩이 끝났을 때
@@ -142,6 +143,7 @@ public class PlayerCtrl3 : MonoBehaviour
     {
         if (canSlide == false)
         {
+            anim.SetBool("IsSliding", false);
             canSlide = true;
         }
     }
@@ -195,8 +197,11 @@ public class PlayerCtrl3 : MonoBehaviour
             {
                 anim.SetBool("IsJumping", false);
             }
+        }
 
-
+        if(Input.GetKeyDown("c"))
+        {
+            anim.SetTrigger("IsSlide");
         }
     }
 

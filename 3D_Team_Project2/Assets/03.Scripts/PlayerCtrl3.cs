@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.SceneManagement;
 
 public class PlayerCtrl3 : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class PlayerCtrl3 : MonoBehaviour
     public float moveSpeed = 10.0f; // 실제로 플레이어가 움직이게 될 속도
     public float dashSpeed = 20.0f; //대쉬 속도
     public float slideSpeed = 30.0f; //슬라이딩 속도
-    public float slideTime = 0.5f; //슬라이딩이 지속되는 시간
+    public float slideTime = 0.25f; //슬라이딩이 지속되는 시간
     public float jumpPower = 10.0f; //플레이어의 첫번째 점프 정도
     public float doublejumpPower = 10.0f; //플레이어의 두번째 점프 정도
     private int jumpCount = 2; // 점프 횟수를 셀 변수
@@ -56,22 +57,22 @@ public class PlayerCtrl3 : MonoBehaviour
         Move();
     }
 
+    private void LateUpdate()
+    {
+        
+    }
+
     private void Move()
     {
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        //bool isRun = moveInput.magnitude != 0;
-        //animator.SetBool("IsRun", isRun);
-        //if (isRun)
-        {
-            Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
-            Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
-            Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+        Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+        Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
+        Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
 
-            //lookForward로 하면 좌,우,뒤 이동할 때 따로 애니메이션 추가해야됨, 싫으면 moveDir로 쓰면 됨
-            characterBody.forward = moveDir;
-            //이동
-            transform.position += moveDir * moveSpeed * Time.deltaTime;
-        }
+        //lookForward로 하면 좌,우,뒤 이동할 때 따로 애니메이션 추가해야됨, 싫으면 moveDir로 쓰면 됨
+        characterBody.forward = moveDir;
+        //이동
+        transform.position += moveDir * moveSpeed * Time.deltaTime;
     }
 
     private void LookAround() //플레이어 카메라
@@ -238,6 +239,7 @@ public class PlayerCtrl3 : MonoBehaviour
     public void IsDie()
     {
         Debug.Log("player die");
+        
         this.transform.position = GameObject.Find("StartPos").transform.position;
         this.transform.rotation = GameObject.Find("StartPos").transform.rotation;
     }

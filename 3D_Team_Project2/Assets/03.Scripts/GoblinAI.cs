@@ -39,7 +39,8 @@ public class GoblinAI: MonoBehaviour
 
             if (dist <= attackDist)
             {
-                monsterState = MonsterState.Attack01;
+                //monsterState = MonsterState.Attack01;
+                GameObject.Find("Player").GetComponent<PlayerCtrl>().IsDie();
             }
             else if (dist <= traceDist)
             {

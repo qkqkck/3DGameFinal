@@ -38,7 +38,7 @@ public class SkeletonAI1 : MonoBehaviour
 
             if (dist <= attackDist)
             {
-                monsterState = MonsterState.attack;
+                //monsterState = MonsterState.attack;
                 GameObject.Find("Player").GetComponent<PlayerCtrl>().IsDie();
                 this.transform.position = GameObject.Find("SkelRespPos1").transform.position;
                 this.transform.rotation = GameObject.Find("SkelRespPos1").transform.rotation;

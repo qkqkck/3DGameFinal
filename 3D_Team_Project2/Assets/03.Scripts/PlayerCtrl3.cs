@@ -156,6 +156,7 @@ public class PlayerCtrl3 : MonoBehaviour
             isGround = true;
             anim.SetBool("IsJumping", false);
             jumping = 0;
+            anim.SetBool("IsFalling", false);
         }
     }
 

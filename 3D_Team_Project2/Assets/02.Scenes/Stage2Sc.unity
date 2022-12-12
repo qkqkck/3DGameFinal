@@ -425,6 +425,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &620751135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 309d585ba9505cc408f8720b7b078393, type: 3}
+  m_PrefabInstance: {fileID: 129596452}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &620751136 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 309d585ba9505cc408f8720b7b078393, type: 3}
+  m_PrefabInstance: {fileID: 129596452}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &620751137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620751135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6797fcd52ef18f94d817a353a00f265d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ani: {fileID: 620751136}
 --- !u!1001 &646148951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1216,7 +1239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterBody: {fileID: 271161653}
   cameraArm: {fileID: 1732127282}
-  anim: {fileID: 0}
+  anim: {fileID: 620751136}
   idleSpeed: 10
   moveSpeed: 10
   dashSpeed: 22.5
@@ -1253,7 +1276,7 @@ PrefabInstance:
     - target: {fileID: 1754427014227222888, guid: 12eb8e90617b4c241a3401b104e7f015, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 620751135}
     - target: {fileID: 3837482307733014204, guid: 12eb8e90617b4c241a3401b104e7f015, type: 3}
       propertyPath: m_RootOrder
       value: 0

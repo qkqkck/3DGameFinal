@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 C:\Users\user\Documents\GitHub\3DGameFinal\3D_Team_Project2
+=======
+D:\Unity\3DGameFinal\3D_Team_Project2
+>>>>>>> 38c806470280683257968bbbfe3b27c328d1345f

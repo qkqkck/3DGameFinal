@@ -146,7 +146,7 @@ public class PlayerCtrl3 : MonoBehaviour
     {
         moveSpeed = idleSpeed;
         this.GetComponent<CapsuleCollider>().direction = 1;
-        this.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.51f, 0f);
+        this.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.56f, 0f);
     }
 
     void TFslide() //슬라이딩을 연속으로 사용하지 못하게 하기 위함
